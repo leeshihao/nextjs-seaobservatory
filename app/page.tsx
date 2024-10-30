@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import axios from 'axios';
+import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { MapPin } from 'lucide-react'
 import {
@@ -18,7 +19,39 @@ const Map = dynamic(() => import('@/components/map'), { ssr: false })
 
 export default function PolicyMapPage() {
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
-  
+  const [policies, setPolicies] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Fetch data from Airtable
+    const fetchPolicies = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.airtable.com/v0/${process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID}/TableName`,
+          {
+            headers: {
+              Authorization: `Bearer ${process.env.NEXT_PUBLIC_AIRTABLE_API_KEY}`,
+            },
+          }
+        );
+        const records = response.data.records.map((record: any) => ({
+          id: record.id,
+          name: record.fields.Name,
+          country: record.fields.Country,
+          progress: record.fields.Progress,
+          date: record.fields.Date,
+          actors: record.fields.Actors,
+          source: record.fields.Source,
+        }));
+        setPolicies(records);
+      } catch (error) {
+        console.error("Error fetching data from Airtable:", error);
+      }
+    };
+
+    fetchPolicies();
+  }, []);
+
+
   return (
     <div className="flex flex-col lg:flex-row h-screen p-4 gap-4">
       {/* Policy Feed Section */}
@@ -34,20 +67,25 @@ export default function PolicyMapPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>Country</TableHead>
                 <TableHead>Policy</TableHead>
+                <TableHead>Country</TableHead>
+                <TableHead>Progress</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead>Actors</TableHead>
                 <TableHead>Source</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell>Policy A</TableCell>
-                <TableCell>Singapore</TableCell>
-                <TableCell>Environmental Protection</TableCell>
-                <TableCell>Gov Website</TableCell>
-              </TableRow>
-              {/* Add more rows here once connected to your data source */}
+              {policies.map((policy) => (
+                <TableRow key={policy.id}>
+                  <TableCell>{policy.name}</TableCell>
+                  <TableCell>{policy.country}</TableCell>
+                  <TableCell>{policy.progress}</TableCell>
+                  <TableCell>{policy.date}</TableCell>
+                  <TableCell>{policy.actors}</TableCell>
+                  <TableCell>{policy.source}</TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </div>
