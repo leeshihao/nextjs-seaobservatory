@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, GeoJSON, ZoomControl } from 'react-leaflet'
 import type { GeoJSON as GeoJSONType } from 'geojson'
 import type { Layer, PathOptions } from 'leaflet'
@@ -21,7 +21,7 @@ interface CountryStyle extends PathOptions {
 export default function Map({ onCountrySelect }: MapProps) {
   const [geoJsonData, setGeoJsonData] = useState<GeoJSONType | null>(null)
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
-  const geoJsonLayerRef = useRef<Layer | null>(null)
+//   const geoJsonLayerRef = useRef<Layer | null>(null)
 
   // Fetch GeoJSON data on component mount
   useEffect(() => {
@@ -38,20 +38,30 @@ export default function Map({ onCountrySelect }: MapProps) {
   }, [])
 
   // Style function for countries
-  const getCountryStyle = (feature: any): CountryStyle => {
-    const isSelected = feature.properties.name === selectedCountry
-    
-    return {
-      fillColor: isSelected ? '#2563eb' : '#64748b',
-      color: '#334155',
-      weight: isSelected ? 2 : 1,
-      opacity: 1,
-      fillOpacity: isSelected ? 0.6 : 0.3,
+  const getCountryStyle = (feature: GeoJSON.Feature<GeoJSON.Geometry, GeoJSON.GeoJsonProperties> | undefined): CountryStyle => { // Specify GeoJSON feature type    => { // Specify GeoJSON feature type
+    if (feature && feature.properties && feature.properties.name) {
+        const isSelected = feature.properties.name === selectedCountry
+        
+        return {
+        fillColor: isSelected ? '#2563eb' : '#64748b',
+        color: '#334155',
+        weight: isSelected ? 2 : 1,
+        opacity: 1,
+        fillOpacity: isSelected ? 0.6 : 0.3,
+        }
     }
-  }
-
-  // Event handlers for country interactions
-  const onEachFeature = (feature: any, layer: Layer) => {
+    // Default style if no properties or name
+    return {
+        fillColor: '#64748b',
+        color: '#334155',
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.3,
+        }
+}
+  
+  // Update the onEachFeature function to specify types and remove unused variable
+  const onEachFeature = (feature: GeoJSON.Feature, layer: Layer) => {
     // Add tooltip with country name
     if (feature.properties && feature.properties.name) {
       layer.bindTooltip(feature.properties.name, {
@@ -63,24 +73,26 @@ export default function Map({ onCountrySelect }: MapProps) {
 
     // Add hover effect
     layer.on({
-      mouseover: (e) => {
-        const layer = e.target
-        layer.setStyle({
-          fillOpacity: 0.7,
-          weight: 2
-        })
-      },
-      mouseout: (e) => {
-        const layer = e.target
-        layer.setStyle(getCountryStyle(feature))
-      },
-      click: (e) => {
-        const countryName = feature.properties.name
-        setSelectedCountry(countryName)
-        onCountrySelect(countryName)
-      }
-    })
-  }
+        mouseover: (e) => { // eslint-disable-line @typescript-eslint/no-unused-vars
+          const layer = e.target
+          layer.setStyle({
+            fillOpacity: 0.7,
+            weight: 2
+          })
+        },
+        mouseout: (e) => { // eslint-disable-line @typescript-eslint/no-unused-vars
+          const layer = e.target
+          layer.setStyle(getCountryStyle(feature))
+        },
+        click: (e) => { // eslint-disable-line @typescript-eslint/no-unused-vars
+            if (feature.properties?.name) { // Check if properties and name exist
+                const countryName = feature.properties.name
+                setSelectedCountry(countryName)
+                onCountrySelect(countryName)
+              }
+            }
+      })
+    }
 
   return (
     <div className="relative h-full w-full rounded-lg overflow-hidden border">
