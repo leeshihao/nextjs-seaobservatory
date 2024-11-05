@@ -17,13 +17,26 @@ import { Card } from "@/components/ui/card"
 // Import map component dynamically to avoid SSR issues
 const Map = dynamic(() => import('@/components/map'), { ssr: false })
 
+// Define the Policy interface
+interface Policy {
+  id: string;
+  name: string;
+  country: string;
+  progress: string;
+  date: Date;
+  actors: string;
+  source: string;
+}
+
 export default function PolicyMapPage() {
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
-  const [policies, setPolicies] = useState<any[]>([]);
+  const [policies, setPolicies] = useState<Policy[]>([]);
+  console.log("Fetching policies...");
 
   useEffect(() => {
     // Fetch data from Airtable
     const fetchPolicies = async () => {
+      console.log("Fetching policies...");
       try {
         const response = await axios.get(
           `https://api.airtable.com/v0/${process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID}/TableName`,
@@ -33,7 +46,12 @@ export default function PolicyMapPage() {
             },
           }
         );
-        const records = response.data.records.map((record: any) => ({
+
+        // Log the entire response to see what is being returned
+        console.log("Response from Airtable:", response.data);
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const records = response.data.records.map((record: { id: string; fields: { Name: string; Country: string; Progress: string; Date: Date; Actors: string; Source: string; [key: string]: any; } }) => ({
           id: record.id,
           name: record.fields.Name,
           country: record.fields.Country,
@@ -42,6 +60,9 @@ export default function PolicyMapPage() {
           actors: record.fields.Actors,
           source: record.fields.Source,
         }));
+        // Log the records to see if they are being retrieved correctly
+        console.log("Retrieved policies:", records);
+
         setPolicies(records);
       } catch (error) {
         console.error("Error fetching data from Airtable:", error);
@@ -81,7 +102,7 @@ export default function PolicyMapPage() {
                   <TableCell>{policy.name}</TableCell>
                   <TableCell>{policy.country}</TableCell>
                   <TableCell>{policy.progress}</TableCell>
-                  <TableCell>{policy.date}</TableCell>
+                  <TableCell>{policy.date.toLocaleDateString()}</TableCell>
                   <TableCell>{policy.actors}</TableCell>
                   <TableCell>{policy.source}</TableCell>
                 </TableRow>
