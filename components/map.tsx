@@ -1,11 +1,10 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, ZoomControl } from 'react-leaflet';
 import type { GeoJSON as GeoJSONType } from 'geojson';
 import type { Layer, PathOptions } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
 
 interface MapProps {
   onCountrySelect: (country: string) => void;
@@ -23,7 +22,7 @@ export default function Map({ onCountrySelect }: MapProps) {
   const [geoJsonData, setGeoJsonData] = useState<GeoJSONType | null>(null);
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
 
-  const [isMapInitialized, setIsMapInitialized] = useState(false); // Track if the map is initialized
+  // const [isMapInitialized, setIsMapInitialized] = useState(false); // Track if the map is initialized
 
   // Fetch GeoJSON data on component mount
   useEffect(() => {
@@ -32,7 +31,7 @@ export default function Map({ onCountrySelect }: MapProps) {
         const response = await fetch('/sea-countries.geojson');
         const data = await response.json();
         setGeoJsonData(data);
-        setIsMapInitialized(true); // Set to true after data is fetched
+        // setIsMapInitialized(true); // Set to true after data is fetched
       } catch (error) {
         console.error('Error loading GeoJSON:', error);
       }
@@ -84,7 +83,7 @@ export default function Map({ onCountrySelect }: MapProps) {
         const layer = e.target;
         layer.setStyle(getCountryStyle(feature));
       },
-      click: (e) => {
+      click: () => {
         if (feature.properties?.name) {
           const countryName = feature.properties.name;
           setSelectedCountry(countryName);
