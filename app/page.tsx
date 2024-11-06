@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/table"
 import { Card } from "@/components/ui/card"
 
+
 // Import map component dynamically to avoid SSR issues
 const Map = dynamic(() => import('@/components/map'), { ssr: false })
 
@@ -29,20 +30,23 @@ interface Policy {
 }
 
 export default function PolicyMapPage() {
+  console.log("PolicyMapPage component rendered");
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
   const [policies, setPolicies] = useState<Policy[]>([]);
-  console.log("Fetching policies...");
 
   useEffect(() => {
     // Fetch data from Airtable
+    const url = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_ID}?view=Grid%20view`;
+    console.log("Airtable URL:", url);
+    
     const fetchPolicies = async () => {
       console.log("Fetching policies...");
       try {
         const response = await axios.get(
-          `https://api.airtable.com/v0/${process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID}/TableName`,
+          `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_ID}?view=Grid%20view`,
           {
             headers: {
-              Authorization: `Bearer ${process.env.NEXT_PUBLIC_AIRTABLE_API_KEY}`,
+              Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}`,
             },
           }
         );
@@ -119,5 +123,5 @@ export default function PolicyMapPage() {
         </div>
       </Card>
     </div>
-  )
+  );
 }

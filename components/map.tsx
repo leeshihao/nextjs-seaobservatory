@@ -1,139 +1,121 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { MapContainer, TileLayer, GeoJSON, ZoomControl } from 'react-leaflet'
-import type { GeoJSON as GeoJSONType } from 'geojson'
-import type { Layer, PathOptions } from 'leaflet'
-import 'leaflet/dist/leaflet.css'
+import { useEffect, useState, useRef } from 'react';
+import { MapContainer, TileLayer, GeoJSON, ZoomControl } from 'react-leaflet';
+import type { GeoJSON as GeoJSONType } from 'geojson';
+import type { Layer, PathOptions } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 
 interface MapProps {
-  onCountrySelect: (country: string) => void
+  onCountrySelect: (country: string) => void;
 }
 
 interface CountryStyle extends PathOptions {
-  fillColor: string
-  color: string
-  weight: number
-  opacity: number
-  fillOpacity: number
+  fillColor: string;
+  color: string;
+  weight: number;
+  opacity: number;
+  fillOpacity: number;
 }
 
 export default function Map({ onCountrySelect }: MapProps) {
-  const [geoJsonData, setGeoJsonData] = useState<GeoJSONType | null>(null)
-  const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
-//   const geoJsonLayerRef = useRef<Layer | null>(null)
+  const [geoJsonData, setGeoJsonData] = useState<GeoJSONType | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+
+  const [isMapInitialized, setIsMapInitialized] = useState(false); // Track if the map is initialized
 
   // Fetch GeoJSON data on component mount
   useEffect(() => {
     async function fetchGeoJson() {
       try {
-        const response = await fetch('/sea-countries.json')
-        const data = await response.json()
-        setGeoJsonData(data)
+        const response = await fetch('/sea-countries.geojson');
+        const data = await response.json();
+        setGeoJsonData(data);
+        setIsMapInitialized(true); // Set to true after data is fetched
       } catch (error) {
-        console.error('Error loading GeoJSON:', error)
+        console.error('Error loading GeoJSON:', error);
       }
     }
-    fetchGeoJson()
-  }, [])
+    fetchGeoJson();
+  }, []);
+
+
 
   // Style function for countries
-  const getCountryStyle = (feature: GeoJSON.Feature<GeoJSON.Geometry, GeoJSON.GeoJsonProperties> | undefined): CountryStyle => { // Specify GeoJSON feature type    => { // Specify GeoJSON feature type
+  const getCountryStyle = (feature: GeoJSON.Feature | undefined): CountryStyle => {
     if (feature && feature.properties && feature.properties.name) {
-        const isSelected = feature.properties.name === selectedCountry
-        
-        return {
+      const isSelected = feature.properties.name === selectedCountry;
+      return {
         fillColor: isSelected ? '#2563eb' : '#64748b',
         color: '#334155',
         weight: isSelected ? 2 : 1,
         opacity: 1,
         fillOpacity: isSelected ? 0.6 : 0.3,
-        }
+      };
     }
-    // Default style if no properties or name
     return {
-        fillColor: '#64748b',
-        color: '#334155',
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.3,
-        }
-}
-  
-  // Update the onEachFeature function to specify types and remove unused variable
+      fillColor: '#64748b',
+      color: '#334155',
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.3,
+    };
+  };
+
   const onEachFeature = (feature: GeoJSON.Feature, layer: Layer) => {
-    // Add tooltip with country name
     if (feature.properties && feature.properties.name) {
       layer.bindTooltip(feature.properties.name, {
         permanent: false,
         direction: 'center',
-        className: 'bg-background text-foreground px-2 py-1 rounded shadow-lg'
-      })
+        className: 'bg-background text-foreground px-2 py-1 rounded shadow-lg',
+      });
     }
 
-    // Add hover effect
     layer.on({
-        mouseover: (e) => { // eslint-disable-line @typescript-eslint/no-unused-vars
-          const layer = e.target
-          layer.setStyle({
-            fillOpacity: 0.7,
-            weight: 2
-          })
-        },
-        mouseout: (e) => { // eslint-disable-line @typescript-eslint/no-unused-vars
-          const layer = e.target
-          layer.setStyle(getCountryStyle(feature))
-        },
-        click: (e) => { // eslint-disable-line @typescript-eslint/no-unused-vars
-            if (feature.properties?.name) { // Check if properties and name exist
-                const countryName = feature.properties.name
-                setSelectedCountry(countryName)
-                onCountrySelect(countryName)
-              }
-            }
-      })
-    }
+      mouseover: (e) => {
+        const layer = e.target;
+        layer.setStyle({
+          fillOpacity: 0.7,
+          weight: 2,
+        });
+      },
+      mouseout: (e) => {
+        const layer = e.target;
+        layer.setStyle(getCountryStyle(feature));
+      },
+      click: (e) => {
+        if (feature.properties?.name) {
+          const countryName = feature.properties.name;
+          setSelectedCountry(countryName);
+          onCountrySelect(countryName);
+        }
+      },
+    });
+  };
 
   return (
     <div className="relative h-full w-full rounded-lg overflow-hidden border">
-      <MapContainer
-        center={[5.3521, 114.8198]} // Centered on Southeast Asia
-        zoom={4}
-        style={{ height: '100%', width: '100%' }}
-        zoomControl={false} // We'll add custom position for zoom control
-      >
-        {/* Add zoom control to top-right */}
-        <ZoomControl position="topright" />
-        
-        {/* Base map layer */}
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          className="map-tiles"
-        />
-        
-        {/* GeoJSON layer for countries */}
-        {geoJsonData && (
+      {geoJsonData && ( // Render MapContainer only if geoJsonData is loaded
+        <MapContainer
+          center={[5.3521, 114.8198]} // Centered on Southeast Asia
+          zoom={4}
+          style={{ height: '100%', width: '100%' }}
+          zoomControl={false}
+        >
+          <ZoomControl position="topright" />
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            className="map-tiles"
+          />
           <GeoJSON
             data={geoJsonData}
             style={getCountryStyle}
             onEachFeature={onEachFeature}
           />
-        )}
-      </MapContainer>
-
-      {/* Optional legend */}
-      <div className="absolute bottom-4 right-4 bg-background/90 p-3 rounded-lg shadow-lg z-[400] backdrop-blur-sm">
-        <h3 className="font-semibold mb-2">Countries</h3>
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded bg-[#64748b] opacity-30" />
-          <span className="text-sm">Unselected</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded bg-[#2563eb] opacity-60" />
-          <span className="text-sm">Selected</span>
-        </div>
-      </div>
+        </MapContainer>
+      )}
     </div>
-  )
+  );
 }
