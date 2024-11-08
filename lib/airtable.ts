@@ -13,10 +13,14 @@ export async function getPolicies(country?: string) {
 
     return records.map(record => ({
       id: record.id,
-      name: record.get('Name'),
-      country: record.get('Country'),
-      policy: record.get('Policy'),
-      source: record.get('Source'),
+      fields: { // Added fields property
+        Name: record.get('Name'),
+        Country: record.get('Country'),
+        Progress: record.get('Progress'),
+        Date: record.get('Date'),
+        Actors: record.get('Actors'),
+        Source: record.get('Source'),
+      },
     }));
   } catch (error) {
     console.error("Error fetching policies:", error);
