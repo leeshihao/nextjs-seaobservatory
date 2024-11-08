@@ -51,7 +51,7 @@ export default function PolicyMapPage() {
   return (
     <div className="flex flex-col lg:flex-row h-screen p-4 gap-4">
       {/* Policy Feed Section */}
-      <Card className="flex-1 p-4 overflow-hidden">
+      <Card className="flex-1 flex flex-col p-4 overflow-hidden">
         <div className="flex items-center gap-2 mb-4">
           <MapPin className="h-5 w-5" />
           <h2 className="text-2xl font-bold">Policy Feed</h2>
@@ -59,9 +59,9 @@ export default function PolicyMapPage() {
             <span className="text-muted-foreground">({selectedCountry})</span>
           )}
         </div>
-        <div className="overflow-auto">
+        <div className="flex-1 overflow-auto">
           <Table>
-            <TableHeader>
+            <TableHeader className="sticky top-0 bg-background">
               <TableRow>
                 <TableHead>Policy</TableHead>
                 <TableHead>Countries</TableHead>
