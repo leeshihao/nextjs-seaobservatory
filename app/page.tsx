@@ -64,8 +64,8 @@ export default function PolicyMapPage() {
         console.error("Error fetching data from Airtable:", error);
       }
     };
-
-    fetchPolicies();
+  console.log("Fetching policies...");
+  fetchPolicies();
     // // Fetch data from Airtable
     // const url = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_ID}`;
     // console.log("Airtable URL:", url);
