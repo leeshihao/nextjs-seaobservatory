@@ -6,15 +6,15 @@ export async function getPolicies(country?: string) {
   try {
     const records = await base(process.env.AIRTABLE_TABLE_ID as string)
       .select({
-        filterByFormula: country ? `{Country} = '${country}'` : '',
+        filterByFormula: country ? `FIND('${country}', {Country})` : '',
       })
       .all();
 
     return records.map(record => ({
       id: record.id,
-      fields: { // Added fields property
+      fields: {
         Name: record.get('Name'),
-        Country: record.get('Country'),
+        Country: record.get('Countries'),
         Progress: record.get('Progress'),
         Date: record.get('Date'),
         Actors: record.get('Actors'),

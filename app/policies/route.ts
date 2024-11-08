@@ -3,8 +3,8 @@ import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
-  const country = searchParams.get('country')
+  const countries = searchParams.get('countries')
   
-  const policies = await getPolicies(country || undefined)
+  const policies = await getPolicies(countries || undefined)
   return NextResponse.json(policies)
 }
