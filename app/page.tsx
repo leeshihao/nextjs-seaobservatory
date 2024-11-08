@@ -17,18 +17,6 @@ import { Card } from "@/components/ui/card"
 const Map = dynamic(() => import('@/components/map'), { ssr: false })
 
 // Define the type for the records returned from getPolicies
-interface AirtableRawRecord {
-  id: string;
-  fields: {
-    Name: string;
-    Countries: string[];
-    Progress: string;
-    Date: string | Date;
-    Actors: string;
-    Source: string;
-  };
-}
-
 interface AirtableRecord {
   id: string;
   fields: {
@@ -50,22 +38,8 @@ export default function PolicyMapPage() {
       console.log("Fetching policies...");
       try {
         const response = await fetch('/policies');
-        const records = await response.json() as AirtableRawRecord[];
-        
-        // Map the records with proper typing
-        const formattedRecords = records.map((record: AirtableRawRecord) => ({
-          id: record.id,
-          fields: {
-            Name: record.fields.Name,
-            Country: record.fields.Countries,
-            Progress: record.fields.Progress,
-            Date: record.fields.Date,
-            Actors: record.fields.Actors,
-            Source: record.fields.Source,
-          },
-        })) as AirtableRecord[];
-
-        setPolicies(formattedRecords);
+        const records = await response.json() as AirtableRecord[];
+        setPolicies(records);
       } catch (error) {
         console.error("Error fetching data from Airtable:", error);
       }
