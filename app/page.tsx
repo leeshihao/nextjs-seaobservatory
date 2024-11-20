@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
-import { MapPin } from 'lucide-react'
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { MapPin } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -10,11 +10,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Card } from "@/components/ui/card"
+} from "@/components/ui/table";
+import { Card } from "@/components/ui/card";
 
 // Import map component dynamically to avoid SSR issues
-const Map = dynamic(() => import('@/components/map'), { ssr: false })
+const Map = dynamic(() => import("@/components/map"), { ssr: false });
 
 // Define the type for the records returned from getPolicies
 interface AirtableRecord {
@@ -30,15 +30,15 @@ interface AirtableRecord {
 }
 
 export default function PolicyMapPage() {
-  const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [policies, setPolicies] = useState<AirtableRecord[]>([]);
 
   useEffect(() => {
     const fetchPolicies = async () => {
       console.log("Fetching policies...");
       try {
-        const response = await fetch('/policies');
-        const records = await response.json() as AirtableRecord[];
+        const response = await fetch("/policies");
+        const records = (await response.json()) as AirtableRecord[];
         setPolicies(records);
       } catch (error) {
         console.error("Error fetching data from Airtable:", error);
@@ -76,17 +76,17 @@ export default function PolicyMapPage() {
                 <TableRow key={policy.id}>
                   <TableCell>{policy.fields.Name}</TableCell>
                   <TableCell>
-                    {Array.isArray(policy.fields.Country) 
-                      ? policy.fields.Country.join(', ') 
-                      : policy.fields.Country || '-'}
+                    {Array.isArray(policy.fields.Country)
+                      ? policy.fields.Country.join(", ")
+                      : policy.fields.Country || "-"}
                   </TableCell>
                   <TableCell>{policy.fields.Progress}</TableCell>
                   <TableCell>
-                    {policy.fields.Date 
-                      ? (typeof policy.fields.Date === 'string' 
-                          ? policy.fields.Date 
-                          : new Date(policy.fields.Date).toLocaleDateString())
-                      : '-'}
+                    {policy.fields.Date
+                      ? typeof policy.fields.Date === "string"
+                        ? policy.fields.Date
+                        : new Date(policy.fields.Date).toLocaleDateString()
+                      : "-"}
                   </TableCell>
                   <TableCell>{policy.fields.Actors}</TableCell>
                   <TableCell>{policy.fields.Source}</TableCell>

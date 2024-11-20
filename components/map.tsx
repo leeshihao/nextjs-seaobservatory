@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, GeoJSON, ZoomControl } from 'react-leaflet';
-import type { GeoJSON as GeoJSONType } from 'geojson';
-import type { Layer, PathOptions } from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import { useEffect, useState } from "react";
+import { MapContainer, TileLayer, GeoJSON, ZoomControl } from "react-leaflet";
+import type { GeoJSON as GeoJSONType } from "geojson";
+import type { Layer, PathOptions } from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 interface MapProps {
   onCountrySelect: (country: string) => void;
@@ -28,34 +28,34 @@ export default function Map({ onCountrySelect }: MapProps) {
   useEffect(() => {
     async function fetchGeoJson() {
       try {
-        const response = await fetch('/sea-countries.geojson');
+        const response = await fetch("/sea-countries.geojson");
         const data = await response.json();
         setGeoJsonData(data);
         // setIsMapInitialized(true); // Set to true after data is fetched
       } catch (error) {
-        console.error('Error loading GeoJSON:', error);
+        console.error("Error loading GeoJSON:", error);
       }
     }
     fetchGeoJson();
   }, []);
 
-
-
   // Style function for countries
-  const getCountryStyle = (feature: GeoJSON.Feature | undefined): CountryStyle => {
+  const getCountryStyle = (
+    feature: GeoJSON.Feature | undefined
+  ): CountryStyle => {
     if (feature && feature.properties && feature.properties.name) {
       const isSelected = feature.properties.name === selectedCountry;
       return {
-        fillColor: isSelected ? '#2563eb' : '#64748b',
-        color: '#334155',
+        fillColor: isSelected ? "#2563eb" : "#64748b",
+        color: "#334155",
         weight: isSelected ? 2 : 1,
         opacity: 1,
         fillOpacity: isSelected ? 0.6 : 0.3,
       };
     }
     return {
-      fillColor: '#64748b',
-      color: '#334155',
+      fillColor: "#64748b",
+      color: "#334155",
       weight: 1,
       opacity: 1,
       fillOpacity: 0.3,
@@ -66,8 +66,8 @@ export default function Map({ onCountrySelect }: MapProps) {
     if (feature.properties && feature.properties.name) {
       layer.bindTooltip(feature.properties.name, {
         permanent: false,
-        direction: 'center',
-        className: 'bg-background text-foreground px-2 py-1 rounded shadow-lg',
+        direction: "center",
+        className: "bg-background text-foreground px-2 py-1 rounded shadow-lg",
       });
     }
 
@@ -99,7 +99,7 @@ export default function Map({ onCountrySelect }: MapProps) {
         <MapContainer
           center={[5.3521, 114.8198]} // Centered on Southeast Asia
           zoom={4}
-          style={{ height: '100%', width: '100%' }}
+          style={{ height: "100%", width: "100%" }}
           zoomControl={false}
         >
           <ZoomControl position="topright" />

@@ -1,4 +1,7 @@
+import dotenv from 'dotenv';
 import Airtable from 'airtable';
+
+dotenv.config(); // Load environment variables
 
 export async function getPolicies(country?: string) {
   const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
