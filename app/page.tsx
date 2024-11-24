@@ -12,6 +12,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
+import Map2 from "@/components/map2";
+import ResetButton from "@/components/resetButton";
 
 // Import map component dynamically to avoid SSR issues
 const Map = dynamic(() => import("@/components/map"), { ssr: false });
@@ -30,7 +32,6 @@ interface AirtableRecord {
 }
 
 export default function PolicyMapPage() {
-  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [policies, setPolicies] = useState<AirtableRecord[]>([]);
 
   useEffect(() => {
@@ -48,6 +49,15 @@ export default function PolicyMapPage() {
     fetchPolicies();
   }, []);
 
+  //usestate to keep track of which country clicked on
+  const [clickedCountryId, setClickedCountryId] = useState<string | null>(null);
+
+  const filteredPolicies = clickedCountryId
+    ? policies.filter((policy) =>
+        policy.fields.Country.includes(clickedCountryId)
+      )
+    : policies;
+
   return (
     <div className="flex flex-col lg:flex-row h-screen p-4 gap-4">
       {/* Policy Feed Section */}
@@ -55,8 +65,8 @@ export default function PolicyMapPage() {
         <div className="flex items-center gap-2 mb-4">
           <MapPin className="h-5 w-5" />
           <h2 className="text-2xl font-bold">Policy Feed</h2>
-          {selectedCountry && (
-            <span className="text-muted-foreground">({selectedCountry})</span>
+          {clickedCountryId && (
+            <span className="text-muted-foreground">({clickedCountryId})</span>
           )}
         </div>
         <div className="flex-1 overflow-auto">
@@ -72,7 +82,7 @@ export default function PolicyMapPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {policies.map((policy) => (
+              {filteredPolicies.map((policy) => (
                 <TableRow key={policy.id}>
                   <TableCell>{policy.fields.Name}</TableCell>
                   <TableCell>
@@ -98,9 +108,20 @@ export default function PolicyMapPage() {
       </Card>
 
       {/* Map Section */}
-      <Card className="flex-1 p-4">
-        <div className="h-full w-full min-h-[400px]">
-          <Map onCountrySelect={setSelectedCountry} />
+
+      <Card className="flex-1 p-4 overflow-auto">
+        <h1 className="text-center mt-2 font-extrabold text-xl">
+          {clickedCountryId ? clickedCountryId : "Select country to filter"}
+        </h1>
+        <ResetButton
+          clickedCountryId={clickedCountryId}
+          setClickedCountryId={setClickedCountryId}
+        />
+        <div className="h-full w-full min-h-[400px] grid place-items-center overflow-auto">
+          <Map2
+            clickedCountryId={clickedCountryId}
+            setClickedCountryId={setClickedCountryId}
+          />
         </div>
       </Card>
     </div>
