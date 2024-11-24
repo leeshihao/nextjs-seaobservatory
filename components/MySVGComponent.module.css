@@ -1,0 +1,54 @@
+/*.mapContainer {
+  width: 100%;
+  height: 90%;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ccc;
+  position: relative;
+}*/
+
+.mapContainer {
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Allows scrolling if content overflows */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+/*
+.mapSvg {
+  width: 80%;
+  height: 100%;
+  object-fit: contain; 
+  preserveaspectratio: xMidYMid meet; 
+  overflow: auto; 
+}*/
+
+.mapSvg {
+  width: 70%;
+  height: 100%;
+  object-fit: contain; /* Ensure the SVG scales without distortion */
+  overflow: auto; /* Ensure no clipping of SVG content */
+  preserveaspectratio: xMidYMid meet; /* Maintain aspect ratio of SVG */
+}
+
+@media (max-width: 1024px) {
+  /* For medium screens and smaller */
+  .mapSvg {
+    width: 60%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  /* For smaller screens */
+  .mapSvg {
+    width: 60%;
+    height: 80%;
+  }
+}
