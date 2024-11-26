@@ -2,9 +2,14 @@
 
 import { Button, MegaMenu, Navbar } from "flowbite-react";
 
-const NavigationBar: React.FC = () => {
+interface NavigationBarProps {
+  tab: number;
+  setTab: (value: number) => void;
+}
+
+const NavigationBar: React.FC<NavigationBarProps> = ({ tab, setTab }) => {
   const handleContactClick = () => {
-    console.log("Contact us button clicked");
+    tab === 0 ? setTab(1) : setTab(0);
   };
 
   return (
@@ -27,9 +32,14 @@ const NavigationBar: React.FC = () => {
         <Navbar.Collapse>
           <ul>
             <Navbar.Link href="https://www.aisafety.asia/" target="_blank">
-              Home
+              AISA home page
             </Navbar.Link>
-            <Navbar.Link onClick={handleContactClick}>Contact us</Navbar.Link>
+            <Navbar.Link
+              onClick={handleContactClick}
+              className="cursor-pointer"
+            >
+              {tab === 0 ? "Contact us" : "Observatory data"}
+            </Navbar.Link>
           </ul>
         </Navbar.Collapse>
       </div>
