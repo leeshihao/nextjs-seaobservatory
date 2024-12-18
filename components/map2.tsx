@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useLayoutEffect } from "react";
+import { useEffect, useRef, useLayoutEffect } from "react";
 import styles from "./MySVGComponent.module.css";
 
 interface Map2Props {

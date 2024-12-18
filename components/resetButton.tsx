@@ -1,12 +1,9 @@
-import { useEffect, useState, useRef, useLayoutEffect } from "react";
-
 interface ResetButtonProps {
   clickedCountryId: string | null;
   setClickedCountryId: (id: string | null) => void;
 }
 
 const ResetButton: React.FC<ResetButtonProps> = ({
-  clickedCountryId,
   setClickedCountryId,
 }) => {
   const handleClick = () => {

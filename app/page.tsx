@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import { MapPin } from "lucide-react";
 import {
   Table,
@@ -16,9 +15,6 @@ import Map2 from "@/components/map2";
 import ResetButton from "@/components/resetButton";
 import SearchBar from "@/components/SearchBar";
 import NavigationBar from "@/components/NavigationBar";
-
-// Import map component dynamically to avoid SSR issues
-const Map = dynamic(() => import("@/components/map"), { ssr: false });
 
 // Define the type for the records returned from getPolicies
 interface AirtableRecord {
