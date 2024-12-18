@@ -141,7 +141,11 @@ export default function PolicyMapPage() {
                           : "-"}
                       </TableCell>
                       <TableCell>{policy.fields.Actors}</TableCell>
-                      <TableCell>{policy.fields.Source}</TableCell>
+                      <TableCell>
+                        <a href={policy.fields.Source} target="_blank" rel="noopener noreferrer">
+                          {policy.fields.Source}
+                        </a>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
