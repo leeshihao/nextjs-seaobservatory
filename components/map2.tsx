@@ -84,7 +84,7 @@ const Map2: React.FC<Map2Props> = ({
         country.removeEventListener("click", clickHandler);
       });
     };
-  }, []);
+  });
 
   return (
     <>
