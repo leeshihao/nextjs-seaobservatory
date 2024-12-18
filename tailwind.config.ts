@@ -61,6 +61,6 @@ const config: Config = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-Animate"), flowbite.plugin()],
+  plugins: [require("tailwindcss-animate"), flowbite.plugin()],
 };
 export default config;
