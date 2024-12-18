@@ -28,7 +28,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ tab, setTab }) => {
             className="self-start whitespace-nowrap text-4xl font-semibold dark:text-white"
             style={{ color: "#459773" }}
           >
-            AISA
+            SEA Observatory
           </span>
         </Navbar.Brand>
 

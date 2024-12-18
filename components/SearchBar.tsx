@@ -25,7 +25,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ keyword, setKeyword }) => {
       <div>
         <input
           type="text"
-          placeholder="Search here..."
+          placeholder="Search policies by keyword..."
           value={keyword || ""}
           onChange={handleChange}
           onKeyDown={handleKeyDown}

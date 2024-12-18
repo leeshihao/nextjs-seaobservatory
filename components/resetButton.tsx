@@ -1,17 +1,19 @@
 interface ResetButtonProps {
-  clickedCountryId: string | null;
+  clickedCountryId?: string | null;
   setClickedCountryId: (id: string | null) => void;
+  className?: string;
 }
 
 const ResetButton: React.FC<ResetButtonProps> = ({
   setClickedCountryId,
+  className,
 }) => {
   const handleClick = () => {
     console.log("Resetting country selection!");
     setClickedCountryId(null);
   };
   return (
-    <div className="flex justify-center items-center">
+    <div className={`flex justify-center items-center ${className}`}>
       <button
         type="button"
         onClick={handleClick}
