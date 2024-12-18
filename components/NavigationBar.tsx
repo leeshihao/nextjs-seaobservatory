@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, MegaMenu, Navbar } from "flowbite-react";
+import { MegaMenu, Navbar } from "flowbite-react";
 
 interface NavigationBarProps {
   tab: number;
@@ -9,7 +9,11 @@ interface NavigationBarProps {
 
 const NavigationBar: React.FC<NavigationBarProps> = ({ tab, setTab }) => {
   const handleContactClick = () => {
-    tab === 0 ? setTab(1) : setTab(0);
+    if (tab === 0) {
+      setTab(1);
+    } else {
+      setTab(0);
+    }
   };
 
   return (
@@ -24,7 +28,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ tab, setTab }) => {
             className="self-start whitespace-nowrap text-4xl font-semibold dark:text-white"
             style={{ color: "#459773" }}
           >
-            AISA
+            SEA Observatory
           </span>
         </Navbar.Brand>
 

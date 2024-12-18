@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import { MapPin } from "lucide-react";
 import {
   Table,
@@ -16,9 +15,6 @@ import Map2 from "@/components/map2";
 import ResetButton from "@/components/resetButton";
 import SearchBar from "@/components/SearchBar";
 import NavigationBar from "@/components/NavigationBar";
-
-// Import map component dynamically to avoid SSR issues
-const Map = dynamic(() => import("@/components/map"), { ssr: false });
 
 // Define the type for the records returned from getPolicies
 interface AirtableRecord {
@@ -100,7 +96,7 @@ export default function PolicyMapPage() {
     <div>
       <NavigationBar tab={tab} setTab={setTab} />
       {tab === 0 ? (
-        <div className="flex flex-col lg:flex-row h-screen p-4 gap-4">
+        <div className="flex flex-col lg:flex-row h-screen p-0 gap-4">
           {/* Policy Feed Section */}
           <Card className="flex-1 flex flex-col p-4 overflow-hidden">
             <div className="flex items-center gap-2 mb-4">
@@ -112,19 +108,19 @@ export default function PolicyMapPage() {
                 </span>
               )}
             </div>
-            <div className="flex">
+            <div className="mb-4">
               <SearchBar keyword={keyword} setKeyword={setKeyword} />
             </div>
             <div className="flex-1 overflow-auto">
               <Table>
-                <TableHeader className="sticky top-0 bg-background">
+                <TableHeader className="sticky top-0 bg-gray-200 rounded-t-lg">
                   <TableRow>
-                    <TableHead>Policy</TableHead>
+                    <TableHead className="rounded-tl-lg">Policy</TableHead>
                     <TableHead>Countries</TableHead>
                     <TableHead>Progress</TableHead>
                     <TableHead>Date</TableHead>
                     <TableHead>Actors</TableHead>
-                    <TableHead>Source</TableHead>
+                    <TableHead className="rounded-tr-lg">Source</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -145,7 +141,16 @@ export default function PolicyMapPage() {
                           : "-"}
                       </TableCell>
                       <TableCell>{policy.fields.Actors}</TableCell>
-                      <TableCell>{policy.fields.Source}</TableCell>
+                      <TableCell>
+                        <a 
+                          href={policy.fields.Source} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="text-blue-500 underline"
+                        >
+                          {policy.fields.Source}
+                        </a>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -155,20 +160,21 @@ export default function PolicyMapPage() {
 
           {/* Map Section */}
 
-          <Card className="flex-1 p-4 overflow-auto">
-            <h1 className="text-center mt-2 font-extrabold text-xl">
-              {clickedCountryId ? clickedCountryId : "Select country to filter"}
-            </h1>
-            <ResetButton
-              clickedCountryId={clickedCountryId}
-              setClickedCountryId={setClickedCountryId}
-            />
-            <div className="h-full w-full min-h-[400px] grid place-items-center overflow-auto">
+          <Card className="flex-1 p-0 overflow-hidden flex flex-col">
+            <div className="flex-1 h-0 min-h-[400px] grid place-items-center overflow-auto">
               <Map2
                 clickedCountryId={clickedCountryId}
                 setClickedCountryId={setClickedCountryId}
               />
             </div>
+            <h1 className="text-center mt-2 font-bold text-2xl mb-4">
+              {clickedCountryId ? `AI policies in ${clickedCountryId}` : "Select country to filter"}
+            </h1>
+            <ResetButton
+              clickedCountryId={clickedCountryId}
+              setClickedCountryId={setClickedCountryId}
+              className="mt-4 mb-4"
+            />
           </Card>
         </div>
       ) : (
