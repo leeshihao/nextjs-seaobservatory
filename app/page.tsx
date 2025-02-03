@@ -26,6 +26,7 @@ interface AirtableRecord {
     Date: string | Date;
     Actors: string;
     Source: string;
+    Validated: boolean;
   };
 }
 
@@ -58,9 +59,10 @@ export default function PolicyMapPage() {
 
   const filteredPolicies = clickedCountryId
     ? policies.filter((policy) =>
-        policy.fields.Country.includes(clickedCountryId) || policy.fields.Country.includes("ASEAN")
-      )
-    : policies;
+      (policy.fields.Country.includes(clickedCountryId) || policy.fields.Country.includes("ASEAN")) &&
+      policy.fields.Validated 
+    )
+  : policies.filter((policy) => policy.fields.Validated); 
 
   const keywordFilteredPolicies = keyword
     ? filteredPolicies.filter((policy) => {
