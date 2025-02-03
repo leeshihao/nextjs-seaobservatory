@@ -92,6 +92,13 @@ export default function PolicyMapPage() {
       })
     : filteredPolicies;
 
+  // Sort the policies by date
+  const sortedPolicies = keywordFilteredPolicies.sort((a, b) => {
+    const dateA = new Date(a.fields.Date);
+    const dateB = new Date(b.fields.Date);
+    return dateB.getTime() - dateA.getTime(); // Latest first
+  });
+
   return (
     <div>
       <NavigationBar tab={tab} setTab={setTab} />
@@ -124,7 +131,7 @@ export default function PolicyMapPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {keywordFilteredPolicies.map((policy) => (
+                  {sortedPolicies.map((policy) => (
                     <TableRow key={policy.id}>
                       <TableCell>{policy.fields.Name}</TableCell>
                       <TableCell>
