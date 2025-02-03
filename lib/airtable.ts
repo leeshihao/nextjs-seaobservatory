@@ -22,6 +22,7 @@ export async function getPolicies(country?: string) {
         Date: record.get('Date'),
         Actors: record.get('Actors'),
         Source: record.get('Source'),
+        Validated: record.get('Validated'),
       },
     }));
   } catch (error) {
