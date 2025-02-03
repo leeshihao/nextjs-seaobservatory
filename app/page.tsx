@@ -58,7 +58,7 @@ export default function PolicyMapPage() {
 
   const filteredPolicies = clickedCountryId
     ? policies.filter((policy) =>
-        policy.fields.Country.includes(clickedCountryId)
+        policy.fields.Country.includes(clickedCountryId) || policy.fields.Country.includes("ASEAN")
       )
     : policies;
 
