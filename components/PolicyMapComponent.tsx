@@ -21,7 +21,7 @@ interface AirtableRecord {
     Country: string[];
     Progress: string;
     Date: string | Date;
-    Actors: string;
+    Actors: string[];
     Source: string;
     Validated: boolean;
   };
@@ -123,7 +123,7 @@ const PolicyMapComponent: React.FC = () => {
                   <TableCell>
                     {Array.isArray(policy.fields.Country)
                       ? policy.fields.Country.join(", ")
-                      : policy.fields.Country || "-"}
+                      : policy.fields.Country}
                   </TableCell>
                   <TableCell>{policy.fields.Progress}</TableCell>
                   <TableCell>
@@ -133,7 +133,9 @@ const PolicyMapComponent: React.FC = () => {
                         : new Date(policy.fields.Date).toLocaleDateString()
                       : "-"}
                   </TableCell>
-                  <TableCell>{policy.fields.Actors}</TableCell>
+                  <TableCell>{Array.isArray(policy.fields.Actors)
+                      ? policy.fields.Actors.join(", ")
+                      : policy.fields.Actors}</TableCell>
                   <TableCell>
                     <a 
                       href={policy.fields.Source} 
@@ -151,7 +153,7 @@ const PolicyMapComponent: React.FC = () => {
         </div>
       </Card>
 
-      <Card className="flex-1 p-0 overflow-hidden flex flex-col">
+      <Card className="flex-1 h-full p-0 overflow-auto flex flex-col">
         <div className="flex-1 h-0 min-h-[400px] grid place-items-center overflow-auto">
           <Map2
             clickedCountryId={clickedCountryId}
