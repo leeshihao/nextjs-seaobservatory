@@ -90,7 +90,7 @@ const PolicyMapComponent: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen p-0 gap-4">
+    <div className="flex flex-col lg:flex-row h-[calc(100vh-6rem)] p-0 gap-4">
       <Card className="flex-1 flex flex-col p-4 overflow-hidden">
         <div className="flex items-center gap-2 mb-4">
           <MapPin className="h-5 w-5" />
