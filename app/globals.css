@@ -4,7 +4,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  overflow: hidden;
+  overflow-x: hidden; 
 }
 
 /* Leaflet map container styles */
@@ -31,6 +31,7 @@ body {
   backdrop-filter: blur(4px);
   font-size: 0.75rem;
 }
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -86,6 +87,7 @@ body {
     --chart-5: 340 75% 55%;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
@@ -94,7 +96,8 @@ body {
     @apply bg-background text-foreground;
   }
 }
-/* Add this CSS to your global styles or a specific CSS module */
+
+/* Scrollbar styles */
 ::-webkit-scrollbar {
   width: 12px; /* Width of the scrollbar */
 }
@@ -111,4 +114,72 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555; /* Color of the thumb on hover */
+}
+
+/* RESPONSIVE STYLES */
+@layer utilities {
+  /* Mobile-first responsive layout adjustments */
+  @media (max-width: 1023px) {
+    /* Enable vertical scrolling on mobile */
+    body {
+      overflow-y: auto;
+    }
+    
+    /* Adjust table font sizes for smaller screens */
+    .responsive-table {
+      font-size: 0.875rem;
+    }
+    
+    /* Make table cells more compact on small screens */
+    td, th {
+      padding: 0.5rem 0.75rem;
+    }
+    
+    /* Ensure the map has proper height on mobile */
+    .leaflet-container {
+      height: 300px !important;
+      min-height: 300px;
+    }
+  }
+  
+  /* Adjust map height for different screen sizes */
+  .map-container {
+    height: 300px;
+  }
+  
+  @media (min-width: 768px) {
+    .map-container {
+      height: 350px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .map-container {
+      height: 100%;
+    }
+    
+    /* Return to hidden overflow on desktop to prevent unwanted scrollbars */
+    body {
+      overflow: hidden;
+    }
+  }
+  
+  /* Improve touch targets on mobile */
+  @media (max-width: 640px) {
+    button, 
+    a, 
+    [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+      padding: 0.5rem;
+    }
+    
+    /* Apply responsive text truncation for tables */
+    .truncate-cell {
+      max-width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }
