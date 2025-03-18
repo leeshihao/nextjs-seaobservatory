@@ -45,7 +45,7 @@ const Navbar = () => {
             {/* Logo */}
             <Link href="/" className="flex items-center">
                 <span
-                    className="self-start whitespace-nowrap text-4xl font-semibold dark:text-white"
+                    className="self-start whitespace-nowrap text-xl sm:text-2xl md:text-4xl font-semibold dark:text-white"
                     style={{ color: "#459773" }}
                 >
                     SEA Observatory

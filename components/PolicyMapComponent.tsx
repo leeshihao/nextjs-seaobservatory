@@ -90,7 +90,8 @@ const PolicyMapComponent: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col lg:flex-row h-[calc(100vh-6rem)] p-0 gap-4">
+    // Your updated component with responsive classes
+    <div className="flex flex-col lg:flex-row h-auto lg:h-[calc(100vh-6rem)] p-0 gap-4">
       <Card className="flex-1 flex flex-col p-4 overflow-hidden">
         <div className="flex items-center gap-2 mb-4">
           <MapPin className="h-5 w-5" />
@@ -104,15 +105,15 @@ const PolicyMapComponent: React.FC = () => {
         <div className="mb-4">
           <SearchBar keyword={keyword} setKeyword={setKeyword} />
         </div>
-        <div className="flex-1 overflow-auto">
+        <div className="flex-1 overflow-auto max-h-[50vh] lg:max-h-full">
           <Table>
             <TableHeader className="sticky top-0 bg-gray-200 rounded-t-lg">
               <TableRow>
                 <TableHead className="rounded-tl-lg">Policy</TableHead>
                 <TableHead>Countries</TableHead>
-                <TableHead>Progress</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Actors</TableHead>
+                <TableHead className="hidden md:table-cell">Progress</TableHead>
+                <TableHead className="hidden md:table-cell">Date</TableHead>
+                <TableHead className="hidden lg:table-cell">Actors</TableHead>
                 <TableHead className="rounded-tr-lg">Source</TableHead>
               </TableRow>
             </TableHeader>
@@ -125,15 +126,15 @@ const PolicyMapComponent: React.FC = () => {
                       ? policy.fields.Country.join(", ")
                       : policy.fields.Country}
                   </TableCell>
-                  <TableCell>{policy.fields.Progress}</TableCell>
-                  <TableCell>
+                  <TableCell className="hidden md:table-cell">{policy.fields.Progress}</TableCell>
+                  <TableCell className="hidden md:table-cell">
                     {policy.fields.Date
                       ? typeof policy.fields.Date === "string"
                         ? policy.fields.Date
                         : new Date(policy.fields.Date).toLocaleDateString()
                       : "-"}
                   </TableCell>
-                  <TableCell>{Array.isArray(policy.fields.Actors)
+                  <TableCell className="hidden lg:table-cell">{Array.isArray(policy.fields.Actors)
                       ? policy.fields.Actors.join(", ")
                       : policy.fields.Actors}</TableCell>
                   <TableCell>
@@ -143,7 +144,7 @@ const PolicyMapComponent: React.FC = () => {
                       rel="noopener noreferrer" 
                       className="text-blue-500 underline"
                     >
-                      {policy.fields.Source}
+                      Link
                     </a>
                   </TableCell>
                 </TableRow>
@@ -153,8 +154,8 @@ const PolicyMapComponent: React.FC = () => {
         </div>
       </Card>
 
-      <Card className="flex-1 h-full p-0 overflow-auto flex flex-col">
-        <div className="flex-1 h-0 min-h-[400px] grid place-items-center overflow-auto">
+      <Card className="flex-1 h-[400px] lg:h-full p-0 overflow-auto flex flex-col mt-4 lg:mt-0">
+        <div className="flex-1 min-h-[300px] grid place-items-center overflow-auto">
           <Map2
             clickedCountryId={clickedCountryId}
             setClickedCountryId={setClickedCountryId}
@@ -166,7 +167,7 @@ const PolicyMapComponent: React.FC = () => {
         <ResetButton
           clickedCountryId={clickedCountryId}
           setClickedCountryId={setClickedCountryId}
-          className="mt-4 mb-4"
+          className="mt-2 mb-4 mx-auto"
         />
       </Card>
     </div>
