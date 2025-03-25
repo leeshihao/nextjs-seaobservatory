@@ -24,7 +24,7 @@
     "flowbite-react": "^0.10.2",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.454.0",
-    "next": "^15.1.2",
+    "next": "^15.2.4",
     "nextjs": "file:",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
