@@ -38,9 +38,9 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav ref={navRef} className={`fixed w-full bg-white z-50 transition-shadow ${hasScrolled ? "shadow-md" : ""} mt-4 mb-4`}>
+    <nav ref={navRef} className={`fixed w-full bg-white z-50 transition-all duration-300 ease-in-out ${hasScrolled ? "shadow-md" : ""}`}>
       <Collapsible open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-        <div className="container mx-auto px-6">
+        <div className="w-full px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center">
