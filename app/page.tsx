@@ -50,7 +50,7 @@ export default function LandingPage() {
               </div>
               <div className="flex flex-col gap-6">
                 <h3 className="text-2xl font-semibold text-neutral-900">
-                  Theory of Change
+                  Our Approach
                 </h3>
                 <p className="text-lg leading-relaxed text-zinc-800">
                   By providing accessible, comprehensive data and analysis, we
@@ -71,7 +71,7 @@ export default function LandingPage() {
             <div className="grid grid-cols-2 gap-12 mt-12 max-md:grid-cols-1">
               <div>
                 <Image
-                  src="https://placehold.co/600x400"
+                  src="/images/Map_of_ASEAN_member_states.svg.png"
                   alt="Southeast Asia Map"
                   width={600}
                   height={400}
@@ -82,12 +82,13 @@ export default function LandingPage() {
                 <p className="text-lg leading-relaxed text-zinc-800">
                   Southeast Asia represents one of the world&apos;s most dynamic and
                   diverse regions, comprising 11 countries with a combined
-                  population of over 650 million people.
+                  population of over 600 million people.
                 </p>
                 <p className="text-lg leading-relaxed text-zinc-800">
                   ASEAN, established in 1967, serves as the primary regional
                   organization promoting economic, political, and social
-                  cooperation among its 10 member states.
+                  cooperation among its 10 member countries. The 11th 
+                  country in SEA (Timor-Leste) is currently in the process of joining. 
                 </p>
                 <p className="text-lg leading-relaxed text-zinc-800">
                   The region&apos;s rapid digital transformation and growing AI
@@ -104,31 +105,31 @@ export default function LandingPage() {
             <h2 className="text-5xl font-bold text-center text-neutral-900 max-sm:text-3xl">
               Our Team
             </h2>
-            <div className="grid grid-cols-4 gap-8 mt-12 max-md:grid-cols-2 max-sm:grid-cols-1">
+            <div className="grid grid-cols-4 gap-12 mt-12 max-md:grid-cols-2 max-sm:grid-cols-1">
               <div
                 className="flex flex-col items-center"
                 onMouseEnter={() => setTeamHover(0)}
                 onMouseLeave={() => setTeamHover(null)}
               >
                 <div
-                  className="overflow-hidden relative w-60 h-60 rounded-full transition-transform duration-200"
+                  className="overflow-hidden relative w-48 h-48 rounded-full transition-transform duration-200"
                   style={{
                     transform: teamHover === 0 ? "scale(1.05)" : "scale(1)",
                   }}
                 >
                   <Image
-                    src="https://placehold.co/240x240"
+                    src="/images/Shi_Hao.jpg"
                     alt="Team Member 1"
-                    width={240}
-                    height={240}
-                    className="object-cover size-full"
+                    width={192}
+                    height={192}
+                    className="object-cover size-full object-[center_0%]"
                   />
                 </div>
                 <h3 className="mt-6 text-2xl font-semibold text-neutral-900">
-                  Dr. Sarah Chen
+                  Shi Hao Lee
                 </h3>
                 <p className="mt-2 text-base text-stone-500">
-                  Project Director
+                  SEA Observatory Lead
                 </p>
               </div>
 
@@ -138,23 +139,23 @@ export default function LandingPage() {
                 onMouseLeave={() => setTeamHover(null)}
               >
                 <div
-                  className="overflow-hidden relative w-60 h-60 rounded-full transition-transform duration-200"
+                  className="overflow-hidden relative w-48 h-48 rounded-full transition-transform duration-200"
                   style={{
                     transform: teamHover === 1 ? "scale(1.05)" : "scale(1)",
                   }}
                 >
                   <Image
-                    src="https://placehold.co/240x240"
+                    src="/images/philip.jpg"
                     alt="Team Member 2"
-                    width={240}
-                    height={240}
+                    width={192}
+                    height={192}
                     className="object-cover size-full"
                   />
                 </div>
                 <h3 className="mt-6 text-2xl font-semibold text-neutral-900">
-                  Dr. Ahmad Rahman
+                  Philip Tham
                 </h3>
-                <p className="mt-2 text-base text-stone-500">Lead Researcher</p>
+                <p className="mt-2 text-base text-stone-500">Software contributor</p>
               </div>
 
               <div
@@ -163,23 +164,25 @@ export default function LandingPage() {
                 onMouseLeave={() => setTeamHover(null)}
               >
                 <div
-                  className="overflow-hidden relative w-60 h-60 rounded-full transition-transform duration-200"
+                  className="overflow-hidden relative w-48 h-48 rounded-full transition-transform duration-200"
                   style={{
                     transform: teamHover === 2 ? "scale(1.05)" : "scale(1)",
                   }}
                 >
                   <Image
-                    src="https://placehold.co/240x240"
+                    src="/images/Lyan.jpg"
                     alt="Team Member 3"
-                    width={240}
-                    height={240}
+                    width={192}
+                    height={192}
                     className="object-cover size-full"
                   />
                 </div>
                 <h3 className="mt-6 text-2xl font-semibold text-neutral-900">
-                  Maria Santos
+                  Lyantoniette Chua
                 </h3>
-                <p className="mt-2 text-base text-stone-500">Policy Analyst</p>
+                <p className="mt-2 text-base text-stone-500">Advisor</p>
+                <p className="mt-2 text-base text-stone-500">AISA co-founder </p>
+                <p className="mt-2 text-base text-stone-500">100 Brilliant Women in AI Ethics for 2024 </p>
               </div>
 
               <div
@@ -188,7 +191,7 @@ export default function LandingPage() {
                 onMouseLeave={() => setTeamHover(null)}
               >
                 <div
-                  className="overflow-hidden relative w-60 h-60 rounded-full transition-transform duration-200"
+                  className="overflow-hidden relative w-48 h-48 rounded-full transition-transform duration-200"
                   style={{
                     transform: teamHover === 3 ? "scale(1.05)" : "scale(1)",
                   }}
@@ -196,15 +199,17 @@ export default function LandingPage() {
                   <Image
                     src="https://placehold.co/240x240"
                     alt="Team Member 4"
-                    width={240}
-                    height={240}
+                    width={192}
+                    height={192}
                     className="object-cover size-full"
                   />
                 </div>
                 <h3 className="mt-6 text-2xl font-semibold text-neutral-900">
-                  Tom Nguyen
+                  Dr. Supheakmungkol Sarin
                 </h3>
-                <p className="mt-2 text-base text-stone-500">Data Scientist</p>
+                <p className="mt-2 text-base text-stone-500">AI Expert for UN High-Level Advisory Body on AI
+Ex-WEF, Google
+</p>
               </div>
             </div>
           </div>
