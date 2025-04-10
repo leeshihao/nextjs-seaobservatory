@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
-import Map2 from "@/components/map2";
+import Map from "@/components/map";
 import ResetButton from "@/components/resetButton";
 import SearchBar from "@/components/SearchBar";
 
@@ -156,7 +156,7 @@ const PolicyMapComponent: React.FC = () => {
 
       <Card className="flex-1 h-[400px] lg:h-full p-0 overflow-auto flex flex-col mt-4 lg:mt-0">
         <div className="flex-1 min-h-[300px] grid place-items-center overflow-auto">
-          <Map2
+          <Map
             clickedCountryId={clickedCountryId}
             setClickedCountryId={setClickedCountryId}
           />

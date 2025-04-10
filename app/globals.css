@@ -5,6 +5,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden; 
+  overflow-y: auto;
 }
 
 /* Leaflet map container styles */
@@ -159,9 +160,9 @@ body {
     }
     
     /* Return to hidden overflow on desktop to prevent unwanted scrollbars */
-    body {
+    /* body {
       overflow: hidden;
-    }
+    } */
   }
   
   /* Improve touch targets on mobile */
