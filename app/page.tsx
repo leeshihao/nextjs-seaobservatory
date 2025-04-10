@@ -10,8 +10,8 @@ export default function LandingPage() {
   return (
     <>
       <Analytics />
-      <div className="flex flex-col w-full bg-neutral-50 min-h-screen">
-        <header className="flex flex-col justify-center items-center px-6 text-white bg-indigo-700 min-h-screen">
+      <div className="flex flex-col w-full bg-neutral-50 overflow-y-auto">
+        <section className="flex flex-col justify-center items-center px-6 text-white bg-indigo-700 px-6 py-24">
           <div className="w-full max-w-[1200px]">
             <h1 className="text-6xl font-bold leading-none max-sm:text-4xl">
               Mapping AI Policies Across Southeast Asia
@@ -27,7 +27,7 @@ export default function LandingPage() {
               Explore the Map
             </a>
           </div>
-        </header>
+        </section>
 
         <section className="flex justify-center px-6 py-32 bg-white">
           <div className="max-w-[1200px]">
@@ -197,7 +197,7 @@ export default function LandingPage() {
                   }}
                 >
                   <Image
-                    src="https://placehold.co/240x240"
+                    src="/images/mungkol.jpg"
                     alt="Team Member 4"
                     width={192}
                     height={192}
