@@ -32,8 +32,8 @@ export default function RootLayout({
           <title>SEA Observatory</title>
           <meta name="description" content="AI policies in South East Asia" />
           {/* <!-- Google tag (gtag.js) --> */}
-          <Script async src="https://www.googletagmanager.com/gtag/js?id=G-JEC5DGZE1F"></Script>
-          <Script id="google-analytics">
+          <Script src="https://www.googletagmanager.com/gtag/js?id=G-JEC5DGZE1F" strategy="afterInteractive"></Script>
+          <Script id="google-analytics" strategy="afterInteractive">
             {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
