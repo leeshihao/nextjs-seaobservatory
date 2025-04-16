@@ -11,7 +11,7 @@ export default function LandingPage() {
     <>
       <Analytics />
       <div className="flex flex-col w-full bg-neutral-50 overflow-y-auto">
-        <section className="flex flex-col justify-center items-center px-6 text-white bg-indigo-700 px-6 py-24">
+        <section className="flex flex-col justify-center items-center text-white bg-indigo-700 px-6 py-24 rounded-md">
           <div className="w-full max-w-[1200px]">
             <h1 className="text-6xl font-bold leading-none max-sm:text-4xl">
               Mapping AI Policies Across Southeast Asia
@@ -63,7 +63,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="flex justify-center px-6 py-32 bg-neutral-100">
+        <section className="flex justify-center px-6 py-32 bg-neutral-100 rounded-md">
           <div className="max-w-[1200px]">
             <h2 className="text-5xl font-bold text-neutral-900 max-sm:text-3xl">
               Southeast Asia & ASEAN
@@ -105,7 +105,7 @@ export default function LandingPage() {
             <h2 className="text-5xl font-bold text-center text-neutral-900 max-sm:text-3xl">
               Our Team
             </h2>
-            <div className="grid grid-cols-4 gap-12 mt-12 max-md:grid-cols-2 max-sm:grid-cols-1">
+            <div className="grid grid-cols-4 gap-12 mt-12 max-lg:grid-cols-2 max-sm:grid-cols-1">
               <div
                 className="flex flex-col items-center"
                 onMouseEnter={() => setTeamHover(0)}
@@ -180,9 +180,10 @@ export default function LandingPage() {
                 <h3 className="mt-6 text-2xl font-semibold text-neutral-900">
                   Lyantoniette Chua
                 </h3>
-                <p className="mt-2 text-base text-stone-500">Advisor</p>
-                <p className="mt-2 text-base text-stone-500">AISA co-founder </p>
-                <p className="mt-2 text-base text-stone-500">100 Brilliant Women in AI Ethics for 2024 </p>
+                <div className="mt-2 flex flex-col items-center w-full max-w-[250px]">
+                  <p className="mt-2 text-base text-stone-500">Advisor, AISA co-founder</p>
+                  <p className="mt-2 text-sm text-stone-500">100 Brilliant Women in AI Ethics 2024 </p>
+                </div>
               </div>
 
               <div
@@ -207,9 +208,10 @@ export default function LandingPage() {
                 <h3 className="mt-6 text-2xl font-semibold text-neutral-900">
                   Dr. Supheakmungkol Sarin
                 </h3>
-                <p className="mt-2 text-base text-stone-500">AI Expert for UN High-Level Advisory Body on AI
-Ex-WEF, Google
-</p>
+                <div className="mt-2 flex flex-col items-center w-full max-w-[250px]">
+                  <p className="mt-2 text-base text-stone-500">Advisor, AISA CTO</p>
+                  <p className="mt-2 text-sm text-stone-500">AI Expert for UN High-Level Advisory Body on AI, Ex-WEF, Google </p>
+                </div>
               </div>
             </div>
           </div>
