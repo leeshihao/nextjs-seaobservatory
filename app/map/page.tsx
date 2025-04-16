@@ -1,9 +1,15 @@
 // map/page.tsx
 "use client";
 
-import PolicyMapComponent from "@/components/PolicyMapComponent";
+import dynamic from 'next/dynamic';
 
-const PolicyMapPage: React.FC = () => {
+// Load the map component only when needed (with no SSR)
+const PolicyMapComponent = dynamic(
+  () => import('@/components/PolicyMapComponent'),
+  { ssr: false, loading: () => <div className="h-[400px] w-full flex items-center justify-center">Loading map...</div> }
+);
+
+const PolicyMapPage = () => {
   return (
     <div>
       <PolicyMapComponent />
