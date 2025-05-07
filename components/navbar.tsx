@@ -60,6 +60,9 @@ const Navbar = () => {
               <Link href="/map" className="text-gray-900 hover:text-blue-600 text-lg pt-1">
                 Map
               </Link>
+              <Link href="/projects" className="text-gray-900 hover:text-blue-600 text-lg pt-1">
+                Projects
+              </Link>
               <Link href="/contact" className="text-gray-900 hover:text-blue-600 text-lg pt-1">
                 Contact Us
               </Link>
@@ -81,9 +84,12 @@ const Navbar = () => {
               <Link href="/" className="block py-2 text-gray-900 hover:text-blue-600 text-base">
                 Home
               </Link>
-              {/* <Link href="/company" className="block py-2 text-gray-900 hover:text-blue-600 text-base">
-                Company
-              </Link> */}
+              <Link href="/map" className="block py-2 text-gray-900 hover:text-blue-600 text-base">
+                Map
+              </Link>
+              <Link href="/projects" className="block py-2 text-gray-900 hover:text-blue-600 text-base">
+                Projects
+              </Link>
               <Link href="/contact" className="block py-2 text-gray-900 hover:text-blue-600 text-base">
                 Contact Us
               </Link>
