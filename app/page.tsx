@@ -36,13 +36,13 @@ export default function LandingPage() {
             </h2>
             <div className="grid grid-cols-2 gap-12 mt-12 max-md:grid-cols-1">
               <div className="flex flex-col gap-6">
-                <p className="text-lg leading-relaxed text-zinc-800">
+                <p className="text-lg text-justify leading-relaxed text-zinc-800">
                   The Southeast Asia AI Policy Observatory serves as a central
                   hub for tracking, analyzing, and understanding the evolution
                   of artificial intelligence policies across ASEAN member
                   states.
                 </p>
-                <p className="text-lg leading-relaxed text-zinc-800">
+                <p className="text-lg text-justify leading-relaxed text-zinc-800">
                   Our mission is to promote transparency, facilitate knowledge
                   sharing, and support evidence-based policymaking in the
                   region&apos;s rapidly evolving AI landscape.
@@ -52,12 +52,18 @@ export default function LandingPage() {
                 <h3 className="text-2xl font-semibold text-neutral-900">
                   Our Approach
                 </h3>
-                <p className="text-lg leading-relaxed text-zinc-800">
+                <p className="text-lg text-justify leading-relaxed text-zinc-800">
                   By providing accessible, comprehensive data and analysis, we
                   enable policymakers, researchers, and stakeholders to make
                   informed decisions that shape the future of AI governance in
                   Southeast Asia.
                 </p>
+                <a
+                  href="/projects"
+                  className="inline-block px-8 py-4 text-lg font-semibold bg-indigo-700 text-white rounded-lg shadow-[0_4px_12px_rgba(0,0,0,0.1)] transition-transform duration-200 hover:-translate-y-1"
+                >
+                  Check out projects built with SEA Observatory
+                </a>
               </div>
             </div>
           </div>
@@ -79,18 +85,18 @@ export default function LandingPage() {
                 />
               </div>
               <div className="flex flex-col gap-6">
-                <p className="text-lg leading-relaxed text-zinc-800">
+                <p className="text-lg text-justify leading-relaxed text-zinc-800">
                   Southeast Asia represents one of the world&apos;s most dynamic and
                   diverse regions, comprising 11 countries with a combined
                   population of over 600 million people.
                 </p>
-                <p className="text-lg leading-relaxed text-zinc-800">
+                <p className="text-lg text-justify leading-relaxed text-zinc-800">
                   ASEAN, established in 1967, serves as the primary regional
                   organization promoting economic, political, and social
                   cooperation among its 10 member countries. The 11th 
                   country in SEA (Timor-Leste) is currently in the process of joining. 
                 </p>
-                <p className="text-lg leading-relaxed text-zinc-800">
+                <p className="text-lg text-justify leading-relaxed text-zinc-800">
                   The region&apos;s rapid digital transformation and growing AI
                   adoption make it a crucial arena for studying and shaping AI
                   policy developments.
