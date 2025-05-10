@@ -41,6 +41,11 @@ export default function RootLayout({
               gtag('config', 'G-JEC5DGZE1F');
             `}
           </Script>
+          {/* Airtable preconnect/prefetch */}
+          <link rel="preconnect" href="https://airtable.com" />
+          <link rel="preconnect" href="https://static.airtable.com" />
+          <link rel="dns-prefetch" href="https://airtable.com" />
+          <link rel="dns-prefetch" href="https://static.airtable.com" />
         </>
       </head>
       <body
