@@ -13,7 +13,7 @@ const ResetButton: React.FC<ResetButtonProps> = ({
     setClickedCountryId(null);
   };
   return (
-    <div className={`flex justify-center items-center ${className}`}>
+    <div className={`${className}`}>
       <button
         type="button"
         onClick={handleClick}

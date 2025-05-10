@@ -164,11 +164,20 @@ const PolicyMapComponent: React.FC = () => {
         <h1 className="text-center mt-2 font-bold text-2xl mb-4">
           {clickedCountryId ? `AI policies in ${clickedCountryId}` : "Select country to filter"}
         </h1>
-        <ResetButton
-          clickedCountryId={clickedCountryId}
-          setClickedCountryId={setClickedCountryId}
-          className="mt-2 mb-4 mx-auto"
-        />
+        <div className="flex justify-center items-center gap-4 mt-2 mb-4">
+          <ResetButton
+            clickedCountryId={clickedCountryId}
+            setClickedCountryId={setClickedCountryId}
+          />
+          <a href="/projects">
+            <button
+              type="button"
+              className="bg-blue-500 text-white rounded-full px-5 py-2 hover:bg-blue-600"
+            >
+              Comparisons
+            </button>
+          </a>
+        </div>
       </Card>
     </div>
   );
