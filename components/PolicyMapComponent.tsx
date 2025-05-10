@@ -90,12 +90,21 @@ const PolicyMapComponent: React.FC = () => {
   });
 
   return (
-    // Your updated component with responsive classes
     <div className="flex flex-col lg:flex-row h-auto lg:h-[calc(100vh-6rem)] p-0 gap-4">
       <Card className="flex-1 flex flex-col p-4 overflow-hidden">
         <div className="flex items-center gap-2 mb-4">
           <MapPin className="h-5 w-5" />
-          <h2 className="text-2xl font-bold">Policy Feed</h2>
+          <div className="flex items-center justify-between w-full">
+            <h2 className="text-2xl font-bold">Policy Feed</h2>
+            <a href="https://airtable.com/appb7fB2iWaPJlZcS/pagaBGhxr47wSQ1CQ/form" target="_blank">
+              <button
+                type="button"
+                className="bg-blue-500 text-white rounded-full px-5 py-2 hover:bg-blue-600"
+              >
+                Can&apos;t find a policy?
+              </button>
+            </a>
+          </div>
           {clickedCountryId && (
             <span className="text-muted-foreground">
               ({clickedCountryId})
