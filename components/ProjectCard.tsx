@@ -60,7 +60,7 @@ export default function ProjectCard({ title, subtitle, authors, description, lin
               rel="noopener noreferrer"
               className="inline-block mt-2 text-blue-600 hover:text-blue-800"
             >
-              View the full {title} →
+              View the {title} →
             </a>
           )}
         </div>
