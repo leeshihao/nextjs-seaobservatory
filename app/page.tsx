@@ -32,7 +32,7 @@ export default function LandingPage() {
         <section className="flex justify-center px-6 py-32 bg-white">
           <div className="max-w-[1200px]">
             <h2 className="text-5xl font-bold text-neutral-900 max-sm:text-3xl">
-              About SEA Observatory
+              About SEA AI Observatory
             </h2>
             <div className="grid grid-cols-2 gap-12 mt-12 max-md:grid-cols-1">
               <div className="flex flex-col gap-6">
@@ -62,7 +62,7 @@ export default function LandingPage() {
                   href="/projects"
                   className="inline-block px-8 py-4 text-lg font-semibold bg-indigo-700 text-white rounded-lg shadow-[0_4px_12px_rgba(0,0,0,0.1)] transition-transform duration-200 hover:-translate-y-1"
                 >
-                  Check out projects built with SEA Observatory
+                  Check out projects built with SEA AI Observatory
                 </a>
               </div>
             </div>
@@ -135,7 +135,7 @@ export default function LandingPage() {
                   Shi Hao Lee
                 </h3>
                 <p className="mt-2 text-base text-stone-500">
-                  SEA Observatory Lead
+                  SEA AI Observatory Lead
                 </p>
               </div>
 

@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "SEA Observatory",
-  description: "SEA Observatory",
+  title: "SEA AI Observatory",
+  description: "SEA AI Observatory",
 };
 
 export default function RootLayout({
@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <>
-          <title>SEA Observatory</title>
+          <title>SEA AI Observatory</title>
           <meta name="description" content="AI policies in South East Asia" />
           {/* <!-- Google tag (gtag.js) --> */}
           <Script src="https://www.googletagmanager.com/gtag/js?id=G-JEC5DGZE1F" strategy="afterInteractive"></Script>
