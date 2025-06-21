@@ -48,7 +48,7 @@ const Navbar = () => {
                     className="self-start whitespace-nowrap text-xl sm:text-2xl md:text-4xl font-semibold dark:text-white"
                     style={{ color: "#459773" }}
                 >
-                    SEA Observatory
+                    SEA AI Observatory
                 </span>
             </Link>
 
