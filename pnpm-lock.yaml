@@ -4065,6 +4065,7 @@ snapshots:
       airtable: 0.12.2
       autoprefixer: 10.4.21(postcss@8.5.6)
       axios: 1.10.0
+      brace-expansion: 4.0.1
       class-variance-authority: 0.7.1
       clsx: 2.1.1
       dotenv: 16.5.0
