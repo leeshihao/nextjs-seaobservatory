@@ -7,9 +7,9 @@ const ProjectsPage: React.FC = () => {
     <div>
       {/* AISA Report */}
       <ProjectCard
-        title="AISA Report (draft - full report publishing in July 2025)"
+        title="AISA Report (full report linked)"
         subtitle="Comparison of Government-led AI Policy Making"
-        link="https://docs.google.com/document/d/1EFhK4x0nFNhotRSunzdIdcCDmrICGmunHeHc6vFEObs/"
+        link="https://www.brookings.edu/articles/ai-safety-governance-the-southeast-asian-way/"
         images={[
           {
             src: "/images/projects/aisaReport/table1.png",
